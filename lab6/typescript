@@ -1,0 +1,88 @@
+Script started on Thu Feb 15 20:42:26 2018
+[?1034hbash-3.2$ gcc -Wall -g -o overflow overflow.c
+bash-3.2$ ./overflow
+Address of the variables:
+7ffeecc53ac0 -> &after[0]
+7ffeecc53ac4 -> &after[1]
+7ffeecc53ac8 -> &after[2]
+7ffeecc53acc -> &after[3]
+7ffeecc53ad0 -> &a[0]
+7ffeecc53ad4 -> &a[1]
+7ffeecc53ad8 -> &a[2]
+7ffeecc53adc -> &a[3]
+7ffeecc53ae0 -> &before[0]
+7ffeecc53ae4 -> &before[1]
+7ffeecc53ae8 -> &before[2]
+7ffeecc53aec -> &before[3]
+7ffeecc53ab4 -> &i
+7ffeecc53ab8 -> &index
+
+Initial values:
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 10, 0, 0}
+after = {10, 10, 10, 10}
+i = 2
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 0}
+after = {10, 10, 10, 10}
+i = 3
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {10, 10, 10, 10}
+bash-3.2$ gcc -Wall -g -o overflow overflow.c
+bash-3.2$ ./overflow
+Address of the variables:
+7ffee0f9faa0 -> &after[0]
+7ffee0f9faa4 -> &after[1]
+7ffee0f9faa8 -> &after[2]
+7ffee0f9faac -> &after[3]
+7ffee0f9fab0 -> &after[4]
+7ffee0f9fac0 -> &a[0]
+7ffee0f9fac4 -> &a[1]
+7ffee0f9fac8 -> &a[2]
+7ffee0f9facc -> &a[3]
+7ffee0f9fad0 -> &a[4]
+7ffee0f9fae0 -> &before[0]
+7ffee0f9fae4 -> &before[1]
+7ffee0f9fae8 -> &before[2]
+7ffee0f9faec -> &before[3]
+7ffee0f9faf0 -> &before[4]
+7ffee0f9fa94 -> &i
+7ffee0f9fa98 -> &index
+
+Initial values:
+i = 32766
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+
+i = 0
+before = {10, 10, 10, 10}
+a = {0, 0, 0, 0}
+after = {10, 10, 10, 10}
+i = 1
+before = {10, 10, 10, 10}
+a = {0, 10, 0, 0}
+after = {10, 10, 10, 10}
+i = 2
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 0}
+after = {10, 10, 10, 10}
+i = 3
+before = {10, 10, 10, 10}
+a = {0, 10, 20, 30}
+after = {10, 10, 10, 10}
+bash-3.2$ exit
+exit
+
+Script done on Thu Feb 15 20:48:54 2018
