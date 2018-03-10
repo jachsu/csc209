@@ -1,0 +1,34 @@
+
+<!-- saved from url=(0067)http://www.teach.cs.toronto.edu/~csc209h/winter/labs/lab7-fork.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252"></head><body><h1 id="lab-7-fork">Lab 7: fork</h1>
+<p><strong>Due</strong>: Friday 2 March before 6:30pm</p>
+<h2 id="introduction">Introduction</h2>
+<p>The purpose of this exercise is to play with fork, and get a feeling for how it works. It should be a fairly short lab.</p>
+<h2 id="run-the-simplefork-program">1. Run the simplefork program</h2>
+<p>Open <code>simplefork.c</code> in your favourite editor. Read it through to figure out what it is doing. Compile and run it a few times. Recall from lecture that it is up to the operating system to decide whether the parent or the child runs first after the fork call, and it may change from run to run.</p>
+<p>Question 1: Which lines of output are printed more than once?</p>
+<p>Question 2: Write down all the different possible orders for the output. Note that this includes output orders that you may not be able to reproduce.</p>
+<h2 id="fork-in-a-loop">2. Fork in a loop</h2>
+<p>The program in <code>forkloop.c</code> takes one command-line argument, which is the number of iterations of the loop that calls <code>fork</code>. Try running the program first with 1, 2, or 3 iterations. Notice that the shell prompt sometimes appears in the middle of the output. That happens because the parent process exits before some of the children get a chance to print their output.</p>
+<p>Also notice that some of the parent process ids are 1. This happens when the parent process terminates before the child calls <code>getppid</code>. (What do we call the child and the parent process when it is in thist state?) If you want avoid this situation you can add a <code>sleep(1);</code> just before the return call in main. Note that this is really just a hack and if we really want to ensure that a parent does not terminate before its child, we need to use <code>wait</code> correctly.</p>
+<p>Question 3: How many processes are created, including the original parent, when <code>forkloop</code> is called with 2, 3, and 4 as arguments? <em>n</em> arguments?</p>
+<p>Question 4: If we run <code>forkloop 1</code>, two processes are created, the original parent process and its child. Assuming the process id of the parent is 414 and the process id of the child is 416, we can represent the relationship between these processes using the following ASCII diagram:</p>
+<pre><code>414 -&gt; 416</code></pre>
+<p>Use a similar ASCII diagram to show the processes created and their relationships when you run <code>forkloop 3</code>.</p>
+<h2 id="make-the-parent-create-all-the-new-processes">3. Make the parent create all the new processes</h2>
+<p>Create a copy of <code>forkloop.c</code> called <code>parentcreates.c</code>. In the new file, modify the program so that the new children do not create additional processes, i.e., so that only the original parent calls <code>fork</code>. Keep the <code>printf</code> call for all processes. The resulting diagram will look something like the following when <code>parentcreates 3</code> is run. Note that the child process ids will not necessarily be in sequence.</p>
+<pre><code>414 -&gt; 416
+414 -&gt; 417
+414 -&gt; 420</code></pre>
+<h2 id="make-each-child-create-a-new-process">4. Make each child create a new process</h2>
+<p>Create a copy of <code>forkloop.c</code> called <code>childcreates.c</code>. In the new file, modify the program so that each process creates exactly one a new process. Keep the <code>printf</code> call for all processes. The resulting diagram will look something like the following when <code>childcreates 3</code> is called:</p>
+<pre><code>414 -&gt; 416 -&gt; 417 -&gt; 420</code></pre>
+<h2 id="add-wait-optional">5. Add wait (optional)</h2>
+<p>The information provided by the <code>getppid</code> system call may not always give you the information you expect. If a process's parent has terminated, the process gets "adopted" by the init process, which has a process id of 1, which is returned by <code>getppid</code>.</p>
+<p>A process can <em>wait</em> for its children to terminate. If a process wants to wait until all its children have terminated, it needs to call wait once for each child. Add the appropriate <code>wait</code> calls to both <code>parentcreates</code> and <code>childcreates</code> to ensure that each parent does not terminate before its children.</p>
+<p>Your programs should delay calling <code>wait</code> as long as possible. In other words, if the process has other work to do like creating more children, it should create the children first and then call <code>wait</code>.</p>
+<h2 id="submission">Submission</h2>
+<p>Submit your final <code>parentcreates.c</code> and <code>childcreates.c</code> files to MarkUs under the <code>lab7</code> folder in your repository. Remember to use <code>git pull</code> to first get the starter code.</p>
+<p>Because this is a busy week, we have made part 5 optional. You can get full credit for the lab by only submitting the code for parts 3 and 4.</p>
+<p>You do not need to submit answers to the questions.</p>
+</body></html>
