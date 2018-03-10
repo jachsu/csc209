@@ -1,1 +1,2 @@
-# csc209
+# CSC209
+## A intro course to C
